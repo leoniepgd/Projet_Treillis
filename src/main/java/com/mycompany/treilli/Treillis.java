@@ -19,7 +19,7 @@ public class Treillis {
     
     //Constructeur
     
-    Treillis ( List <Noeud> n, List <Barre> b){
+    public Treillis ( List <Noeud> n, List <Barre> b){
         this.listbarre= b;
         this.listnoeud=n;
     }
