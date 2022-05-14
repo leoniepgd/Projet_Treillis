@@ -13,23 +13,24 @@ import javafx.scene.control.Button;
  * @author yannp
  */
 public class CompoTestSets {
-        public static List<Button> desBoutons() {
+    public static List<Button> desBoutons() {
     List<Button> res = new ArrayList<>();
-    Button jb1 = new Button("Valider");
+    int l = 150;
+    Button jb1 = new Button("Noeud simple");
+    jb1.setPrefWidth(l);
     res.add(jb1);
-    Button jb2 = new Button("Un Bouton avec un Grand Nom");
+    Button jb2 = new Button("Noeud appui simple");
+    jb2.setPrefWidth(l);
     res.add(jb2);
-    Button jb3 = new Button("B");
+    Button jb3 = new Button("Noeud appui double");
+    jb3.setPrefWidth(l);
     res.add(jb3);
-    int ph = 50;
-    Button jb4 = new Button("pref H = " + ph);
-    jb4.setPrefHeight(ph);
+    Button jb4 = new Button("Barre");
+    jb4.setPrefWidth(l);
     res.add(jb4);
-    int pw = 100;
-    Button jb5 = new Button("pref W = " + pw);
-    jb4.setPrefWidth(pw);
+    Button jb5 = new Button("Selectionner");
+    jb5.setPrefWidth(l);
     res.add(jb5);
     return res;
     }
-    
 }
