@@ -13,6 +13,10 @@ public class NoeudAppuiSimple extends NoeudAppui {
     NoeudAppuiSimple(double posx, double posy) {
         super(posx, posy);
     }
+    
+    public NoeudAppuiSimple(int identificateur,double posx, double posy) {
+        super(identificateur, posx, posy);
+    }
 
     @Override
     public String toString() {

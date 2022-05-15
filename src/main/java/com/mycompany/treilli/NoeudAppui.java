@@ -13,6 +13,10 @@ public abstract class NoeudAppui extends Noeud {
     NoeudAppui(double posx, double posy) {
         super(posx, posy);
     }
+    
+    NoeudAppui(int identificateur, double posx, double posy) {
+        super(identificateur, posx, posy);
+    }
 
     @Override
     public String toString() {

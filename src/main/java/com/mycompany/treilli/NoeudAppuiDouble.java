@@ -13,7 +13,12 @@ public class NoeudAppuiDouble extends NoeudAppui {
     NoeudAppuiDouble(double posx, double posy) {
         super(posx, posy);
     }
+    
+    public NoeudAppuiDouble(int identificateur,double posx, double posy) {
+        super(identificateur, posx, posy);
+    }
 
+    
     @Override
     public String toString() {
         return ("NoeudAppuiDouble " + getId() + " : x =" + this.getPosx() + " y = " + this.getPosy());

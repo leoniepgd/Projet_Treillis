@@ -5,6 +5,8 @@
 package com.mycompany.projet_treillis;
 
 import com.mycompany.treilli.Noeud;
+import com.mycompany.treilli.NoeudAppuiDouble;
+import com.mycompany.treilli.NoeudAppuiSimple;
 import com.mycompany.treilli.NoeudSimple;
 import com.mycompany.treilli.Treillis;
 import javafx.event.ActionEvent;
@@ -42,14 +44,19 @@ public class MainPane extends BorderPane{
     private Button bNoeudSimple;
     private Button bNoeudAppuiSimple;
     private Button bNoeudAppuiDouble;
+    private Button bBarre;
     
     private TextField txtFx;
     private TextField txtFy;
+    private TextField txtND;
+    private TextField txtNA;
 
     private Label labelx;
     private Label labely;
+    private Label labelND;
+    private Label labelNA;
     
-	private DessinCanvas cDessin;
+    private DessinCanvas cDessin;
 
 	
 	
@@ -66,23 +73,40 @@ public class MainPane extends BorderPane{
         this.labelx.setText("pos x : ");
         this.txtFx = new TextField();
         this.txtFx.setText("0");
+        this.txtFx.setMaxWidth(50);
         this.labely = new Label ();
-        this.labely.setText("pos x : ");
+        this.labely.setText("pos y : ");
         this.txtFy = new TextField();
         this.txtFy.setText("0");
+        this.txtFy.setMaxWidth(50);
        
                 
         this.bNoeudSimple = new Button("Noeud Simple");
         this.bNoeudAppuiSimple  = new Button("Noeud Appui Simple");;
         this.bNoeudAppuiDouble  = new Button("Noeud Appui Double ");;
             
+        this.labelND = new Label ();
+        this.labelND.setText("Noeud de depart : ");
+        this.txtND = new TextField();
+        this.txtND.setText("1");
+        this.txtND.setMaxWidth(50);
+        this.labelNA = new Label ();
+        this.labelNA.setText("Noeud d'arrivee :   ");
+        this.txtNA = new TextField();
+        this.txtNA.setText("2");
+        this.txtNA.setMaxWidth(50);
         
+        this.bBarre = new Button("Barre");
+        
+        HBox hbpx = new HBox (this.labelx, this.txtFx);
+        HBox hbpy = new HBox (this.labely, this.txtFy);
+        HBox hbND = new HBox (this.labelND, this.txtND);
+        HBox hbNA = new HBox (this.labelNA, this.txtNA);
         HBox hbButton = new HBox (this.bNoeudSimple,this.bNoeudAppuiSimple ,this.bNoeudAppuiDouble); 
-        VBox vbNoeud = new VBox(this.labelx,this.txtFx, this.labely,this.txtFy, hbButton );
+        VBox vbNoeud = new VBox(hbButton, hbpx, hbpy, this.bBarre, hbND, hbNA);
                this.setBottom(vbNoeud);
 
-   
-
+        
         this.bGrouper = new Button("Grouper");
    
         this.bGrouper.setOnAction(new EventHandler<ActionEvent>() {
@@ -111,19 +135,29 @@ public class MainPane extends BorderPane{
 
         
         this.bNoeudSimple.setOnAction(evt -> {
-            
-        	Noeud nd = new NoeudSimple (Double.parseDouble (this.txtFx.getText()),Double.parseDouble(this.txtFy.getText()),model.maxIdNoeud(model.getlistnoeud()) + 1);
-        	
-        	model.ajouteNoeud(model.getlistnoeud(),nd );
-        	
-        	// Pour dessiner
-        	this.cDessin.getChildren().add(nd.dessine());
+            Noeud nd = new NoeudSimple (Double.parseDouble (this.txtFx.getText()),Double.parseDouble(this.txtFy.getText()),model.maxIdNoeud(model.getlistnoeud()) + 1);
+            model.ajouteNoeud(model.getlistnoeud(),nd );
+            // Pour dessiner
+            this.cDessin.getChildren().add(nd.dessine());
+            System.out.printf("Bouton Noeud Simple id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
+        });
         
-            System.out.printf("Bouton Noeux Simple id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
+        this.bNoeudAppuiSimple.setOnAction(evt -> {
+            Noeud nd = new NoeudAppuiSimple (model.maxIdNoeud(model.getlistnoeud()) + 1,Double.parseDouble (this.txtFx.getText()),Double.parseDouble(this.txtFy.getText()));
+            model.ajouteNoeud(model.getlistnoeud(),nd );
+            // Pour dessiner
+            this.cDessin.getChildren().add(nd.dessine());
+            System.out.printf("Bouton Noeud Appui Simple id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
+        });
         
-    });
-            
-
+        this.bNoeudAppuiDouble.setOnAction(evt -> {
+            Noeud nd = new NoeudAppuiDouble (model.maxIdNoeud(model.getlistnoeud()) + 1,Double.parseDouble (this.txtFx.getText()),Double.parseDouble(this.txtFy.getText()));
+            model.ajouteNoeud(model.getlistnoeud(),nd );
+            // Pour dessiner
+            this.cDessin.getChildren().add(nd.dessine());
+            System.out.printf("Bouton Noeud Appui Double id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
+        });
+        
     }
 
     /**

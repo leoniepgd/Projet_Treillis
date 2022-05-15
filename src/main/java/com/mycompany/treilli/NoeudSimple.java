@@ -23,7 +23,7 @@ public class NoeudSimple extends Noeud {
 
 
     public NoeudSimple(double posx, double posy , int identificateur) { // Constructeur 3
-        super(identificateur,posx, posy);
+        super(identificateur, posx, posy);
     }
 
     
