@@ -45,7 +45,10 @@ public class Treillis {
    public static int maxIdNoeud (List <Noeud>  n){
       int maxid=0;
       for (int i=0; i<n.size(); i++){
-          if (n.get(i).getId()>n.get(i-1).getId()){ //Cherche si l'identifiant du noeud est supérieur ou non au précedent
+          if (i == 0) {
+        	  maxid=n.get(i).getId();
+          }
+          else if (n.get(i).getId()>n.get(i-1).getId()){ //Cherche si l'identifiant du noeud est supérieur ou non au précedent
               maxid=n.get(i).getId();
           }
         }

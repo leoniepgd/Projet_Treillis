@@ -4,9 +4,12 @@
  */
 package com.mycompany.projet_treillis;
 
+import com.mycompany.treilli.Noeud;
+import com.mycompany.treilli.NoeudSimple;
 import com.mycompany.treilli.Treillis;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -46,6 +49,7 @@ public class MainPane extends BorderPane{
 	private DessinCanvas cDessin;
 
 	
+	
     public MainPane(Treillis model){
         this.rbSelect = new RadioButton("Select");
         this.rbPoint = new RadioButton("Points");
@@ -74,13 +78,7 @@ public class MainPane extends BorderPane{
         VBox vbNoeud = new VBox(this.labelx,this.txtFx, this.labely,this.txtFy, hbButton );
                this.setBottom(vbNoeud);
 
-        this.bNoeudSimple.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                System.out.println("Bouton Noeux Simple");
-            }
-        });
-        
+   
 
         this.bGrouper = new Button("Grouper");
    
@@ -108,6 +106,16 @@ public class MainPane extends BorderPane{
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
 
+        
+        this.bNoeudSimple.setOnAction(evt -> {
+            
+        	Noeud nd = new NoeudSimple (Double.parseDouble (this.txtFx.getText()),Double.parseDouble(this.txtFy.getText()),model.maxIdNoeud(model.getlistnoeud()) + 1);
+        	
+        	model.ajouteNoeud(model.getlistnoeud(),nd );
+        
+            System.out.printf("Bouton Noeux Simple id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
+        
+    });
             
 
     }

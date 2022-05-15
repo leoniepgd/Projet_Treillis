@@ -8,6 +8,7 @@ import com.mycompany.treilli.Treillis;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -15,7 +16,7 @@ import javafx.scene.layout.Pane;
  */
 public class DessinCanvas extends Pane{
     
-    private Canvas realCanvas;
+    public Canvas realCanvas;
     private MainPane main;
     
     public DessinCanvas(MainPane main) {
@@ -34,10 +35,10 @@ public class DessinCanvas extends Pane{
     }
     
     public void redrawAll() {
-        //System.out.println("redraw");
+        System.out.println("redraw");
         GraphicsContext context = this.realCanvas.getGraphicsContext2D();
-        //context.setFill(Color.RED);  // Pour faire apparaitre le canvas en rouge
-        //context.fillRect(0,0, this.realCanvas.getWidth(), this.realCanvas.getHeight());  // pour obtenir la taille en temps réel du canvas
+        context.setFill(Color.RED);  // Pour faire apparaitre le canvas en rouge
+        context.fillRect(0,0, this.realCanvas.getWidth(), this.realCanvas.getHeight());  // pour obtenir la taille en temps réel du canvas
         Treillis model = this.main.getModel();
     }
 }

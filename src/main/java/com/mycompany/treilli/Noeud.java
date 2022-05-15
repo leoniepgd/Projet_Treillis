@@ -7,6 +7,10 @@ package com.mycompany.treilli;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Ellipse;
+
 /**
  *
  * @author yannp
@@ -20,6 +24,11 @@ public abstract class Noeud {
     private Vecteur2D force;
     private List<Barre> barresDepart;
     private List<Barre> barresArrivee;
+    
+    private static final double TAILLE_NOEUD = 10;
+
+    
+    private Color color = new Color (0.0,0.0,0.0,1); 
 
     // Constructeur 1
     Noeud(int n, double x, double y, Vecteur2D f) {
@@ -51,6 +60,17 @@ public abstract class Noeud {
         this.barresArrivee = new ArrayList<>();
     }
 
+    // Constructeur 4
+    Noeud(int n, double x, double y) {
+        this.id = n;
+        this.posx = x;
+        this.posy = y;
+        this.force = new Vecteur2D(0, 0);
+        this.barresDepart = new ArrayList<>();
+        this.barresArrivee = new ArrayList<>();
+    }
+
+    
     // get et set
     @Override
     public String toString() {
@@ -73,7 +93,7 @@ public abstract class Noeud {
         this.id = id;
     }
 
-    /**
+    /**POINT
      * @return the posx
      */
     public double getPosx() {
@@ -141,6 +161,15 @@ public abstract class Noeud {
      */
     public void setBarresArrivee(List<Barre> barresArrivee) {
         this.barresArrivee = barresArrivee;
+    }
+ 
+    
+    public Group dessine() {
+        Ellipse res = new Ellipse(this.posx, this.posy, TAILLE_NOEUD, TAILLE_NOEUD);
+        res.setStroke(this.color);
+        res.setFill(this.color);
+        Group g = new Group(res);
+        return g;
     }
 
     public List<Barre> barreincidentes(Noeud n){

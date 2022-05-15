@@ -10,13 +10,23 @@ package com.mycompany.treilli;
  */
 public class NoeudSimple extends Noeud {
 
-    NoeudSimple(double posx, double posy, Vecteur2D force, int identificateur) { //Constructeur 1
+	public NoeudSimple(double posx, double posy, Vecteur2D force, int identificateur) { //Constructeur 1
         super(identificateur,posx, posy, force);
     }
-    NoeudSimple(double posx, double posy, Vecteur2D force) { // Constructeur 2
+    public NoeudSimple(double posx, double posy, Vecteur2D force) { // Constructeur 2
         super(posx, posy, force);
     }
 
+    public NoeudSimple(double posx, double posy ) { // Constructeur 3
+        super(posx, posy);
+    }
+
+
+    public NoeudSimple(double posx, double posy , int identificateur) { // Constructeur 3
+        super(identificateur,posx, posy);
+    }
+
+    
     @Override
     public String toString() {
         return ("NoeudSimple " + getId() + " : x =" + this.getPosx() + " y = " + this.getPosy());
