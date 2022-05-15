@@ -115,6 +115,9 @@ public class MainPane extends BorderPane{
         	Noeud nd = new NoeudSimple (Double.parseDouble (this.txtFx.getText()),Double.parseDouble(this.txtFy.getText()),model.maxIdNoeud(model.getlistnoeud()) + 1);
         	
         	model.ajouteNoeud(model.getlistnoeud(),nd );
+        	
+        	// Pour dessiner
+        	this.cDessin.getChildren().add(nd.dessine());
         
             System.out.printf("Bouton Noeux Simple id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
         
