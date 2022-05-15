@@ -8,6 +8,8 @@ import com.mycompany.treilli.Treillis;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -25,7 +27,13 @@ public class Main extends Application {
         List<Noeud> n = new ArrayList<Noeud>();
         List<Barre> b = new ArrayList<Barre>() ;
         Treillis model = new Treillis( n, b);
-        Scene scene = new Scene(new MainPane(model),800,600);  // Soit FlowPaneExemple ou HBoxExemple ou BorderPaneExemple ou MainPane
+        MainPane mp = new MainPane(model); 
+        Scene scene = new Scene(mp,800,600);  // Soit FlowPaneExemple ou HBoxExemple ou BorderPaneExemple ou MainPane
+
+        
+        
+   
+        
         primaryStage.setScene(scene);
         primaryStage.show();
     }

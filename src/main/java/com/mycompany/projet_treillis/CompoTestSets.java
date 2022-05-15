@@ -29,8 +29,9 @@ public class CompoTestSets {
     jb4.setPrefWidth(l);
     res.add(jb4);
     Button jb5 = new Button("Selectionner");
-    jb5.setPrefWidth(l);
+
     res.add(jb5);
+
     return res;
     }
 }

@@ -8,9 +8,13 @@ import com.mycompany.treilli.Treillis;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -29,18 +33,57 @@ public class MainPane extends BorderPane{
     
     private Button bGrouper;
     private Button bCouleur;
+    private Button bNoeudSimple;
+    private Button bNoeudAppuiSimple;
+    private Button bNoeudAppuiDouble;
     
-    private DessinCanvas cDessin;
+    private TextField txtFx;
+    private TextField txtFy;
+
+    private Label labelx;
+    private Label labely;
     
+	private DessinCanvas cDessin;
+
+	
     public MainPane(Treillis model){
         this.rbSelect = new RadioButton("Select");
         this.rbPoint = new RadioButton("Points");
         this.rbSegments = new RadioButton("Segments");
         
+        
         VBox vbGauche = new VBox(this.getRbSelect(), this.getRbPoint(), this.getRbSegments());
         this.setLeft(vbGauche);
+
+        this.labelx = new Label ();
+        this.labelx.setText("pos x : ");
+        this.txtFx = new TextField();
+        this.txtFx.setText("0");
+        this.labely = new Label ();
+        this.labely.setText("pos x : ");
+        this.txtFy = new TextField();
+        this.txtFy.setText("0");
+       
+                
+        this.bNoeudSimple = new Button("Noeud Simple");
+        this.bNoeudAppuiSimple  = new Button("Noeud Appui Simple");;
+        this.bNoeudAppuiDouble  = new Button("Noeud Appui Double ");;
+            
         
+        HBox hbButton = new HBox (this.bNoeudSimple,this.bNoeudAppuiSimple ,this.bNoeudAppuiDouble); 
+        VBox vbNoeud = new VBox(this.labelx,this.txtFx, this.labely,this.txtFy, hbButton );
+               this.setBottom(vbNoeud);
+
+        this.bNoeudSimple.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                System.out.println("Bouton Noeux Simple");
+            }
+        });
+        
+
         this.bGrouper = new Button("Grouper");
+   
         this.bGrouper.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -60,6 +103,7 @@ public class MainPane extends BorderPane{
         });
         VBox vbDroit = new VBox(this.getbGrouper(), this.getbCouleur());
         this.setRight(vbDroit);
+
         
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
