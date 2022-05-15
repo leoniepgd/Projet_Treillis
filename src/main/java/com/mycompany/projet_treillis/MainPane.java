@@ -36,6 +36,9 @@ public class MainPane extends BorderPane{
     
     private Button bGrouper;
     private Button bCouleur;
+    private Button bSave;
+    private Button bLoad;
+    
     private Button bNoeudSimple;
     private Button bNoeudAppuiSimple;
     private Button bNoeudAppuiDouble;
