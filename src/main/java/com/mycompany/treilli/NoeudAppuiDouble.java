@@ -4,6 +4,8 @@
  */
 package com.mycompany.treilli;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author yannp
@@ -12,10 +14,12 @@ public class NoeudAppuiDouble extends NoeudAppui {
 
     NoeudAppuiDouble(double posx, double posy) {
         super(posx, posy);
+        this.color = Color.YELLOW;
     }
     
     public NoeudAppuiDouble(int identificateur,double posx, double posy) {
         super(identificateur, posx, posy);
+        this.color = Color.YELLOW;
     }
 
     

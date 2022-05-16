@@ -28,8 +28,7 @@ public abstract class Noeud {
     private static final double TAILLE_NOEUD = 10;
 
     
-    private Color color = new Color (0.0,0.0,0.0,1); 
-
+    protected Color color;
     // Constructeur 1
     Noeud(int n, double x, double y, Vecteur2D f) {
         this.id = n;
@@ -38,6 +37,8 @@ public abstract class Noeud {
         this.force = f;
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
+        this.color = Color.BLACK;
+
     }
 
     // Constructeur 2
@@ -48,6 +49,7 @@ public abstract class Noeud {
         this.force = f;
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
+        this.color = Color.BLACK;
     }
 
     // Constructeur 3
@@ -58,6 +60,7 @@ public abstract class Noeud {
         this.force = new Vecteur2D(0, 0);
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
+        this.color = Color.BLACK;
     }
 
     // Constructeur 4
@@ -68,6 +71,7 @@ public abstract class Noeud {
         this.force = new Vecteur2D(0, 0);
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
+        this.color = Color.BLACK;
     }
 
     

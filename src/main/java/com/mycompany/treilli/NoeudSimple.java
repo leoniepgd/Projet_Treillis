@@ -4,26 +4,33 @@
  */
 package com.mycompany.treilli;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author yannp
  */
 public class NoeudSimple extends Noeud {
 
+
 	public NoeudSimple(double posx, double posy, Vecteur2D force, int identificateur) { //Constructeur 1
-        super(identificateur,posx, posy, force);
+		super(identificateur,posx, posy, force);
+		this.color = Color.GREEN; 
     }
     public NoeudSimple(double posx, double posy, Vecteur2D force) { // Constructeur 2
         super(posx, posy, force);
+        this.color = Color.GREEN; 
     }
 
     public NoeudSimple(double posx, double posy ) { // Constructeur 3
         super(posx, posy);
+        this.color = Color.GREEN; 
     }
 
 
     public NoeudSimple(double posx, double posy , int identificateur) { // Constructeur 3
         super(identificateur, posx, posy);
+        this.color = Color.GREEN; 
     }
 
     

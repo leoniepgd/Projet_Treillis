@@ -4,18 +4,23 @@
  */
 package com.mycompany.treilli;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author yannp
  */
 public class NoeudAppuiSimple extends NoeudAppui {
 
+	
     NoeudAppuiSimple(double posx, double posy) {
         super(posx, posy);
+        this.color = Color.BLUE; 
     }
     
     public NoeudAppuiSimple(int identificateur,double posx, double posy) {
         super(identificateur, posx, posy);
+        this.color = Color.BLUE;
     }
 
     @Override
