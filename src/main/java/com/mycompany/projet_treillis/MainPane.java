@@ -68,6 +68,22 @@ public class MainPane extends BorderPane{
     
     private DessinCanvas cDessin;
     
+    
+    public Noeud trouveNoeud (int idNd) {
+    boolean o = false;
+    Noeud NoeudReturn ;
+    for (int i=0; i<model.listnoeud.size(); i++){
+        NoeudReturn = model.listnoeud.get(i);
+        int id1= model.listnoeud.get(i).getId();
+        if (idNd==id1){
+            o = true;
+            
+         return model.listnoeud.get(i);   
+        }
+   }
+    
+    return model.listnoeud.get(0);
+} 
 
     public MainPane(Treillis model){
         this.model = model;
@@ -154,8 +170,7 @@ public class MainPane extends BorderPane{
         VBox vbNoeud = new VBox(hbButton, hbpx, hbpy, this.bBarre, hbND, hbNA);
                this.setBottom(vbNoeud);
 
-       
-        
+
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
 
@@ -185,20 +200,21 @@ public class MainPane extends BorderPane{
         });
         
         this.bBarre.setOnAction(evt -> {
-//           int idNd = Integer.parseInt (this.txtND.getText());
-//           Noeud Nd = model.trouveNoeud(idNd);
-//           Noeud Nd = new Noeud (Integer.parseInt (this.txtND.getText()), getPosx(), getPosy());
-//           Noeud Na = model.trouveNoeud(idNd);
-//           Noeud Na = new Noeud (Integer.parseInt (this.txtNA.getText()), getPosx(), getPosy());
-//           Barre b = new Barre (Nd, Na, model.maxIdBarre(model.getlistbarre())+1);
-//            //Pour dessiner
-//            this.cDessin.getChildren().add(b.Barredessine());
-//            System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n",b.getId(), b.getNd(),b.getNf());
+           int idNd = Integer.parseInt (this.txtND.getText());
+           Noeud Nd = trouveNoeud(idNd);
+           //Noeud Nd = new Noeud (Integer.parseInt (this.txtND.getText()), getPosx(), getPosy());
+           int idNf = Integer.parseInt (this.txtNA.getText());
+           Noeud Nf = trouveNoeud(idNf);
+          // Noeud Na = new Noeud (Integer.parseInt (this.txtNA.getText()), getPosx(), getPosy());
+           Barre b = new Barre (Nd, Nf, model.maxIdBarre(model.getlistbarre())+1);
+            //Pour dessiner
+            this.cDessin.getChildren().add(b.Barredessine());
+            System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n",b.getId(), b.getNd(),b.getNf());
         });
         
-        
-        
     }
+        
+    
 
     /**
      * @return the rbSelect
@@ -249,4 +265,5 @@ public class MainPane extends BorderPane{
         return model;
     }
 
-}
+
+}//Fin 
