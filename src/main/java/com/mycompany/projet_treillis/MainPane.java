@@ -44,9 +44,11 @@ public class MainPane extends BorderPane{
     private RadioButton rbSegments;
     
     private Button bGrouper;
+    private Button bSelectionner;
+    private Button bSauvegarder;
+    private Button bOuvrir;
     private Button bCouleur;
-    private Button bSave;
-    private Button bLoad;
+    private Button bSupprimer;
     
     private Button bNoeudSimple;
     private Button bNoeudAppuiSimple;
@@ -73,10 +75,42 @@ public class MainPane extends BorderPane{
         this.rbPoint = new RadioButton("Points");
         this.rbSegments = new RadioButton("Segments");
         
+        this.bGrouper = new Button("Grouper");
+        this.bGrouper.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                System.out.println("Bouton grouper cliqué");
+            }
+        });
+        this.bCouleur = new Button("Couleur");
+        this.bCouleur.setOnAction((t) -> {  //Raccourci du "setOnAction" just au-dessus
+            System.out.println("bouton couleur clique");
+        });
+        this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent t) {
+                System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
+            }
+            
+        });
+        int taille = 100 ;
+        this.bSauvegarder = new Button("Sauvegarder");
+        this.bSauvegarder.setPrefWidth(taille);
+        this.bOuvrir = new Button ("Ouvrir"); 
+        this.bOuvrir.setPrefWidth(taille);
+        this.bSelectionner = new Button("Sélectionner");
+        this.bSelectionner.setPrefWidth(taille);
+        this.bGrouper = new Button("Grouper");
+        this.bGrouper.setPrefWidth(taille);
+        this.bSupprimer = new Button("Supprimer");
+        this.bSupprimer.setPrefWidth(taille);
         
-        VBox vbGauche = new VBox(this.getRbSelect(), this.getRbPoint(), this.getRbSegments());
+        VBox vbDroit = new VBox(this.bSauvegarder, this.bOuvrir);
+        this.setRight(vbDroit);
+        
+        VBox vbGauche = new VBox(this.bSelectionner ,this.bGrouper, this.bSupprimer);
         this.setLeft(vbGauche);
-
+        
         this.labelx = new Label ();
         this.labelx.setText("pos x : ");
         this.txtFx = new TextField();
@@ -110,6 +144,7 @@ public class MainPane extends BorderPane{
         this.txtNA.setMaxWidth(50);
         
         this.bBarre = new Button("Barre");
+        this.bBarre.setPrefWidth(taille-10);
         
         HBox hbpx = new HBox (this.labelx, this.txtFx);
         HBox hbpy = new HBox (this.labely, this.txtFy);
@@ -119,29 +154,7 @@ public class MainPane extends BorderPane{
         VBox vbNoeud = new VBox(hbButton, hbpx, hbpy, this.bBarre, hbND, hbNA);
                this.setBottom(vbNoeud);
 
-        
-        this.bGrouper = new Button("Grouper");
-   
-        this.bGrouper.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                System.out.println("Bouton grouper cliqué");
-            }
-        });
-        this.bCouleur = new Button("Couleur");
-        this.bCouleur.setOnAction((t) -> {  //Raccourci du "setOnAction" just au-dessus
-            System.out.println("bouton couleur clique");
-        });
-        this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent t) {
-                System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
-            }
-            
-        });
-        VBox vbDroit = new VBox(this.getbGrouper(), this.getbCouleur());
-        this.setRight(vbDroit);
-
+       
         
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
@@ -172,9 +185,10 @@ public class MainPane extends BorderPane{
         });
         
         this.bBarre.setOnAction(evt -> {
-//            int idNd = Integer.parseInt (this.txtND.getText());
-//            Noeud Nd = model.trouveNoeud(idNd);
+//           int idNd = Integer.parseInt (this.txtND.getText());
+//           Noeud Nd = model.trouveNoeud(idNd);
 //           Noeud Nd = new Noeud (Integer.parseInt (this.txtND.getText()), getPosx(), getPosy());
+//           Noeud Na = model.trouveNoeud(idNd);
 //           Noeud Na = new Noeud (Integer.parseInt (this.txtNA.getText()), getPosx(), getPosy());
 //           Barre b = new Barre (Nd, Na, model.maxIdBarre(model.getlistbarre())+1);
 //            //Pour dessiner
@@ -234,5 +248,5 @@ public class MainPane extends BorderPane{
     public Treillis getModel() {
         return model;
     }
-    
+
 }
