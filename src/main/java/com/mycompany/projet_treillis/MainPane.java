@@ -4,6 +4,7 @@
  */
 package com.mycompany.projet_treillis;
 
+import com.mycompany.treilli.Barre;
 import com.mycompany.treilli.Noeud;
 import com.mycompany.treilli.NoeudAppuiDouble;
 import com.mycompany.treilli.NoeudAppuiSimple;
@@ -11,16 +12,22 @@ import com.mycompany.treilli.NoeudSimple;
 import com.mycompany.treilli.Treillis;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
 
 /**
  *
@@ -55,12 +62,13 @@ public class MainPane extends BorderPane{
     private Label labely;
     private Label labelND;
     private Label labelNA;
+    private Label labelIdN;
     
     private DessinCanvas cDessin;
+    
 
-	
-	
     public MainPane(Treillis model){
+        this.model = model;
         this.rbSelect = new RadioButton("Select");
         this.rbPoint = new RadioButton("Points");
         this.rbSegments = new RadioButton("Segments");
@@ -79,11 +87,16 @@ public class MainPane extends BorderPane{
         this.txtFy = new TextField();
         this.txtFy.setText("0");
         this.txtFy.setMaxWidth(50);
-       
-                
+        
+        this.labelIdN = new Label ();
+        this.labelIdN.setText(String.valueOf(getId())); //Faut-il le convertir ?
+             
         this.bNoeudSimple = new Button("Noeud Simple");
+        this.bNoeudSimple.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
         this.bNoeudAppuiSimple  = new Button("Noeud Appui Simple");;
+        this.bNoeudAppuiSimple.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         this.bNoeudAppuiDouble  = new Button("Noeud Appui Double ");;
+        this.bNoeudAppuiDouble.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
             
         this.labelND = new Label ();
         this.labelND.setText("Noeud de depart : ");
@@ -157,6 +170,19 @@ public class MainPane extends BorderPane{
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Appui Double id : %s - x : %s - y : %s\n",nd.getId(), nd.getPosx(),nd.getPosy());
         });
+        
+        this.bBarre.setOnAction(evt -> {
+//            int idNd = Integer.parseInt (this.txtND.getText());
+//            Noeud Nd = model.trouveNoeud(idNd);
+//           Noeud Nd = new Noeud (Integer.parseInt (this.txtND.getText()), getPosx(), getPosy());
+//           Noeud Na = new Noeud (Integer.parseInt (this.txtNA.getText()), getPosx(), getPosy());
+//           Barre b = new Barre (Nd, Na, model.maxIdBarre(model.getlistbarre())+1);
+//            //Pour dessiner
+//            this.cDessin.getChildren().add(b.Barredessine());
+//            System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n",b.getId(), b.getNd(),b.getNf());
+        });
+        
+        
         
     }
 

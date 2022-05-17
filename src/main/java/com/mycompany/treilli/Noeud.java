@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
@@ -172,7 +173,10 @@ public abstract class Noeud {
         Ellipse res = new Ellipse(this.posx, this.posy, TAILLE_NOEUD, TAILLE_NOEUD);
         res.setStroke(this.color);
         res.setFill(this.color);
-        Group g = new Group(res);
+        Label name = new Label(this.id+"");
+        name.setLayoutX(this.posx);
+        name.setLayoutY(this.posy + 10);
+        Group g = new Group(res,name);
         return g;
     }
 

@@ -4,6 +4,10 @@
  */
 package com.mycompany.treilli;
 
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+
 /**
  *
  * @author yannp
@@ -17,6 +21,7 @@ public class Barre {
     private double tractionmax;
     private double compressionmax;
     private double prix;
+    protected Color color;
 
     //Constructeur
     Barre(Noeud n1, Noeud n2, int i, double t, double c, double p) {
@@ -26,6 +31,7 @@ public class Barre {
         this.compressionmax = c;
         this.id = i;
         this.prix = p;
+        this.color = Color.BLUE;
     }
     
     Barre (Noeud n1, int i, double t, double c, double p){
@@ -34,6 +40,13 @@ public class Barre {
         this.compressionmax = c;
         this.id = i;
         this.prix = p; 
+        this.color = Color.BLUE;
+    }
+    
+    public Barre (Noeud n1, Noeud n2, int i){
+        this.nd = n1;
+        this.nf = n2;
+        this.id = i;
     }
     
    
@@ -44,6 +57,16 @@ public class Barre {
         return ("noeud du début" + this.getNd() + "   noeud de fin" + this.getNf() + "   id  " + this.getId());
     }
 
+    //@Override
+    public Group Barredessine() {
+        Line barre = new Line(this.getNd().getPosx(), this.getNd().getPosy(), this.getNf().getPosx(), this.getNf().getPosy());
+        barre.setStroke(this.color);
+        barre.setFill(this.color);
+        Group gb = new Group(barre);
+        return gb;
+    }
+    
+    
     /**
      * @return the id
      */
@@ -126,6 +149,10 @@ public class Barre {
      */
     public void setPrix(double prix) {
         this.prix = prix;
+    }
+
+    private Object geNd() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
