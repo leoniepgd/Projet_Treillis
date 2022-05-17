@@ -21,7 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -122,10 +125,16 @@ public class MainPane extends BorderPane{
         this.bSupprimer = new Button("Supprimer");
         this.bSupprimer.setPrefWidth(taille);
         
+        HBox hbHaut = new HBox();
+        hbHaut.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null , null)));
+        this.setTop(hbHaut);
+        
         VBox vbDroit = new VBox(this.bSauvegarder, this.bOuvrir);
+        vbDroit.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null , null)));
         this.setRight(vbDroit);
         
         VBox vbGauche = new VBox(this.bSelectionner ,this.bGrouper, this.bSupprimer);
+        vbGauche.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null , null)));
         this.setLeft(vbGauche);
         
         this.labelx = new Label ();
@@ -161,15 +170,22 @@ public class MainPane extends BorderPane{
         this.txtNA.setMaxWidth(50);
         
         this.bBarre = new Button("Barre");
-        this.bBarre.setPrefWidth(taille-10);
+        this.bBarre.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        this.bBarre.setPrefWidth(taille);
         
         HBox hbpx = new HBox (this.labelx, this.txtFx);
         HBox hbpy = new HBox (this.labely, this.txtFy);
         HBox hbND = new HBox (this.labelND, this.txtND);
         HBox hbNA = new HBox (this.labelNA, this.txtNA);
-        HBox hbButton = new HBox (this.bNoeudSimple,this.bNoeudAppuiSimple ,this.bNoeudAppuiDouble); 
-        VBox vbNoeud = new VBox(hbButton, hbpx, hbpy, this.bBarre, hbND, hbNA);
-               this.setBottom(vbNoeud);
+        HBox hbButton = new HBox (this.bNoeudSimple,this.bNoeudAppuiSimple ,this.bNoeudAppuiDouble);
+        VBox vbcc = new VBox (hbButton, hbpx, hbpy);
+        vbcc.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null , null)));
+        VBox vbBarre = new VBox(this.bBarre, hbND, hbNA);
+        vbBarre.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null , null)));
+        HBox hbNoeud = new HBox(vbcc, vbBarre);
+        
+        hbNoeud.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null , null)));
+        this.setBottom(hbNoeud);
 
 
         this.cDessin = new DessinCanvas(this);
