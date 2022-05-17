@@ -27,6 +27,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 
 /**
@@ -202,10 +203,8 @@ public class MainPane extends BorderPane{
         this.bBarre.setOnAction(evt -> {
            int idNd = Integer.parseInt (this.txtND.getText());
            Noeud Nd = trouveNoeud(idNd);
-           //Noeud Nd = new Noeud (Integer.parseInt (this.txtND.getText()), getPosx(), getPosy());
            int idNf = Integer.parseInt (this.txtNA.getText());
            Noeud Nf = trouveNoeud(idNf);
-          // Noeud Na = new Noeud (Integer.parseInt (this.txtNA.getText()), getPosx(), getPosy());
            Barre b = new Barre (Nd, Nf, model.maxIdBarre(model.getlistbarre())+1);
             //Pour dessiner
             this.cDessin.getChildren().add(b.Barredessine());
@@ -264,6 +263,7 @@ public class MainPane extends BorderPane{
     public Treillis getModel() {
         return model;
     }
+    
 
 
 }//Fin 
