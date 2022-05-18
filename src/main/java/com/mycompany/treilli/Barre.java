@@ -59,9 +59,10 @@ public class Barre {
 
     //@Override
     public Group Barredessine() {
+    	System.out.printf("Dessin de la Barre id : %s - (x : %s - y : %s) - (x : %s - y : %s)\n",getId(), this.getNd().getPosx(),this.getNd().getPosy(),this.getNf().getPosx(), this.getNf().getPosy());
         Line barre = new Line(this.getNd().getPosx(), this.getNd().getPosy(), this.getNf().getPosx(), this.getNf().getPosy());
-        barre.setStroke(this.color);
-        barre.setFill(this.color);
+        barre.setStroke(Color.BLACK);
+        barre.setFill(Color.BLACK);
         Group gb = new Group(barre);
         return gb;
     }

@@ -76,17 +76,17 @@ public class MainPane extends BorderPane{
     public Noeud trouveNoeud (int idNd) {
     boolean o = false;
     Noeud NoeudReturn ;
-    for (int i=0; i<model.listnoeud.size(); i++){
-        NoeudReturn = model.listnoeud.get(i);
-        int id1= model.listnoeud.get(i).getId();
+    for (int i=0; i< model.getlistnoeud().size(); i++){
+        NoeudReturn = model.getlistnoeud ().get(i);
+        int id1= model.getlistnoeud ().get(i).getId();
         if (idNd==id1){
             o = true;
             
-         return model.listnoeud.get(i);   
+         return model.getlistnoeud ().get(i);   
         }
    }
     
-    return model.listnoeud.get(0);
+    return null;
 } 
 
     public MainPane(Treillis model){
@@ -219,12 +219,20 @@ public class MainPane extends BorderPane{
         this.bBarre.setOnAction(evt -> {
            int idNd = Integer.parseInt (this.txtND.getText());
            Noeud Nd = trouveNoeud(idNd);
+    
            int idNf = Integer.parseInt (this.txtNA.getText());
            Noeud Nf = trouveNoeud(idNf);
-           Barre b = new Barre (Nd, Nf, model.maxIdBarre(model.getlistbarre())+1);
-            //Pour dessiner
-            this.cDessin.getChildren().add(b.Barredessine());
-            System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n",b.getId(), b.getNd(),b.getNf());
+           if (Nd != null && Nf != null) {
+        	   Barre b = new Barre (Nd, Nf, model.maxIdBarre(model.getlistbarre())+1);
+               //Pour dessiner
+               this.cDessin.getChildren().add(b.Barredessine());
+               System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n",b.getId(), b.getNd(),b.getNf());
+
+           } else
+           { 
+        	   if (Nd == null) this.txtND.setText("");
+        	   if (Nf == null) this.txtNA.setText("");
+           }
         });
         
     }
