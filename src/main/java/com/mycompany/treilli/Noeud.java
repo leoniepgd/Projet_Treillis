@@ -4,6 +4,8 @@
  */
 package com.mycompany.treilli;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,18 +175,23 @@ public abstract class Noeud {
         Ellipse res = new Ellipse(this.posx, this.posy, TAILLE_NOEUD, TAILLE_NOEUD);
         res.setStroke(this.color);
         res.setFill(this.color);
-        Label name = new Label(this.id+"");
-        name.setLayoutX(this.posx);
-        name.setLayoutY(this.posy + 10);
-        Group g = new Group(res,name);
+        Label nameN = new Label(this.id+"");
+        nameN.setLayoutX(this.posx);
+        nameN.setLayoutY(this.posy + 10);
+        Group g = new Group(res,nameN);
         return g;
     }
 
     public List<Barre> barreincidentes(Noeud n){
-        List<Barre> b1= n.getBarresDepart();
-        List<Barre> b2=n.getBarresArrivee();
+        List<Barre> b1 = n.getBarresDepart();
+        List<Barre> b2 = n.getBarresArrivee();
         b1.addAll(b2);
         return b1;
         
     }
+    
+    
+    public abstract void save(Writer w) throws IOException;
+    
+
 }

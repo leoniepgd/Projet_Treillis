@@ -4,7 +4,11 @@
  */
 package com.mycompany.treilli;
 
+import static com.mycompany.treilli.Treillis.maxIdBarre;
+import static com.mycompany.treilli.Treillis.maxIdNoeud;
+import java.util.List;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -63,10 +67,24 @@ public class Barre {
         Line barre = new Line(this.getNd().getPosx(), this.getNd().getPosy(), this.getNf().getPosx(), this.getNf().getPosy());
         barre.setStroke(Color.BLACK);
         barre.setFill(Color.BLACK);
-        Group gb = new Group(barre);
+        Label nameB = new Label(this.id+"");
+        nameB.setLayoutX(this.getNd().getPosx() + 10);
+        nameB.setLayoutY(this.getNd().getPosy() + 10);
+        Group gb = new Group(barre, nameB);
         return gb;
     }
     
+
+    public void ajouteBarre(List<Barre> t, Barre b){
+    if (t.contains(b)){  //Permet de vérifier si b existe dans la liste 
+       System.out.println("Erreur la barre est déjà présente"); 
+    }
+    else{
+       int max=maxIdBarre(t)+1;
+       Barre nouvellebarre= new Barre (b.getNd(), b.getNf(), max);
+       t.add(nouvellebarre);   
+    }
+}
     
     /**
      * @return the id

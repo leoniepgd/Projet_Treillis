@@ -4,6 +4,8 @@
  */
 package com.mycompany.treilli;
 
+import java.io.IOException;
+import java.io.Writer;
 import javafx.scene.paint.Color;
 
 /**
@@ -32,4 +34,10 @@ public class NoeudAppuiDouble extends NoeudAppui {
     public int nbrInconnues() {
         return (2);
     }
+    
+       @Override
+    public void save(Writer w) throws IOException {
+        w.append("NoeudAppuiDouble;" + this.getId() + ";" + this.getPosx() + ";" + this.getPosy() + "\n");
+    }
+
 }

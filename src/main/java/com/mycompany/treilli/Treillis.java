@@ -4,7 +4,11 @@
  */
 package com.mycompany.treilli;
 
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 /**
@@ -13,8 +17,8 @@ import java.util.List;
  */
 public class Treillis {
    // Atributs
-    private List<Barre> listbarre;
-    private List<Noeud> listnoeud;
+    public List<Barre> listbarre;
+    public List<Noeud> listnoeud;
     
     
     //Constructeur
@@ -58,7 +62,7 @@ public class Treillis {
    public static int maxIdBarre (List <Barre> b){
        int maxid=0;
       for (int i=0; i<b.size(); i++){
-          if (b.get(i).getId()>b.get(i-1).getId()){
+          if (b.get(i).getId()>maxid){
               maxid=b.get(i).getId();
           }
         }
@@ -85,5 +89,17 @@ public class Treillis {
            t.add(nouvellebarre);   
        }
     }
+   
+    public void save(Writer w) throws IOException {
+        
+        // w.close();
+    }
+    
+    public void sauvegarde(File fout) throws IOException {
+        BufferedWriter bout = new BufferedWriter(new FileWriter(fout));
+        this.save(bout);
+    }
+
+
    
 }

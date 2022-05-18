@@ -5,6 +5,8 @@
  */
 package com.mycompany.projet_treillis;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Group;
@@ -81,4 +83,7 @@ public class Groupe extends Figure {
     public List<Figure> getContient() {
         return contient;
     }
+    
+    
+  
 }
