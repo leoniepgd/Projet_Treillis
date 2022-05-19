@@ -57,15 +57,10 @@ public class MainPane extends BorderPane {
     //private Groupe model;
     private Treillis model;
     
-    private RadioButton rbSelect;
-    private RadioButton rbPoint;
-    private RadioButton rbSegments;
-    
     private Button bGrouper;
     private Button bSelectionner;
     private Button bSauvegarder;
     private Button bOuvrir;
-    private Button bCouleur;
     private Button bSupprimerNoeud;
     private Button bSupprimerBarre;
     
@@ -124,10 +119,8 @@ public class MainPane extends BorderPane {
     
     
     public MainPane(Treillis model) {
-        this.model = model;
-        this.rbSelect = new RadioButton("Select");
-        this.rbPoint = new RadioButton("Points");
-        this.rbSegments = new RadioButton("Segments");
+        this.model = model;;
+        int taille = 100;
         
         this.bGrouper = new Button("Grouper");
         this.bGrouper.setOnAction(new EventHandler<ActionEvent>() {
@@ -136,19 +129,7 @@ public class MainPane extends BorderPane {
                 System.out.println("Bouton grouper cliqué");
             }
         });
-        this.bCouleur = new Button("Couleur");
-        this.bCouleur.setOnAction((t) -> {  //Raccourci du "setOnAction" just au-dessus
-            System.out.println("bouton couleur clique");
-        });
-        this.bCouleur.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                System.out.println("entered couleur en : " + t.getX() + " , " + t.getY());
-            }
-            
-        });
-        int taille = 100;
-        
+      
         FileChooser fileChooser = new FileChooser();
         this.bSauvegarder = new Button("Sauvegarder");
 //        this.bSauvegarder.setOnAction((t) -> {
@@ -197,12 +178,12 @@ public class MainPane extends BorderPane {
         this.labelIDN = new Label();
         this.labelIDN.setText(" Id Noeud : ");
         this.txtIDN = new TextField();
-        this.txtIDN.setText("0");
+        this.txtIDN.setText("1");
         this.txtIDN.setMaxWidth(50);
         this.labelIDB = new Label();
         this.labelIDB.setText(" Id Barre : ");
         this.txtIDB = new TextField();
-        this.txtIDB.setText("0");
+        this.txtIDB.setText("1");
         this.txtIDB.setMaxWidth(50);
         
         this.labelx = new Label();
@@ -254,7 +235,6 @@ public class MainPane extends BorderPane {
         VBox vbBarre = new VBox(this.bBarre, hbND, hbNA);
         vbBarre.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         HBox hbNoeud = new HBox(vbcc, vbBarre, vbsn, vbsb);
-        
         hbNoeud.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setBottom(hbNoeud);
         
@@ -326,57 +306,14 @@ public class MainPane extends BorderPane {
         
     }
 
-    /**
-     * @return the rbSelect
-     */
-    public RadioButton getRbSelect() {
-        return rbSelect;
-    }
 
-    /**
-     * @return the rbPoint
-     */
-    public RadioButton getRbPoint() {
-        return rbPoint;
-    }
-
-    /**
-     * @return the rbSegments
-     */
-    public RadioButton getRbSegments() {
-        return rbSegments;
-    }
-
-    /**
-     * @return the bGrouper
-     */
-    public Button getbGrouper() {
-        return bGrouper;
-    }
-
-    /**
-     * @return the bCouleur
-     */
-    public Button getbCouleur() {
-        return bCouleur;
-    }
-
-    /**
-     * @return the cDessin
-     */
     public DessinCanvas getcDessin() {
         return cDessin;
     }
 
-    /**
-     * @return the model
-     */
     public Treillis getModel() {
         return model;
     }
     
-    public Button getbSauvegarder() {
-        return bSauvegarder;
-    }
     
 }//Fin 
