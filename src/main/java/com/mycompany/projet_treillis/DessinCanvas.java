@@ -44,7 +44,10 @@ public class DessinCanvas extends Pane {
             Group rep = model.getlistnoeud().get(i).dessine();
             this.getChildren().add(rep);
         }
+        for (int i = 0; i < model.getlistbarre().size(); i++) {
+            Group rep = model.getlistbarre().get(i).Barredessine();
+            this.getChildren().add(rep);
         
-        // TODO Barre
+        }
     }
 }

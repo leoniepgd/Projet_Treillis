@@ -12,14 +12,18 @@ import com.mycompany.treilli.NoeudSimple;
 import com.mycompany.treilli.Treillis;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -34,12 +38,21 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 /**
  *
  * @author yannp
  */
 public class MainPane extends BorderPane {
+
+    /**
+     * @return the bSauvegarder
+     */
+
 
     //private Groupe model;
     private Treillis model;
@@ -53,7 +66,8 @@ public class MainPane extends BorderPane {
     private Button bSauvegarder;
     private Button bOuvrir;
     private Button bCouleur;
-    private Button bSupprimer;
+    private Button bSupprimerNoeud;
+    private Button bSupprimerBarre;
     
     private Button bNoeudSimple;
     private Button bNoeudAppuiSimple;
@@ -64,12 +78,15 @@ public class MainPane extends BorderPane {
     private TextField txtFy;
     private TextField txtND;
     private TextField txtNA;
+    private TextField txtIDN;
+    private TextField txtIDB;
     
     private Label labelx;
     private Label labely;
     private Label labelND;
     private Label labelNA;
-    private Label labelIdN;
+    private Label labelIDN;
+    private Label labelIDB;
     
     private DessinCanvas cDessin;
     
@@ -88,6 +105,23 @@ public class MainPane extends BorderPane {
         
         return null;
     }    
+    
+        public Barre trouveBarre(int idB) {
+        boolean o = false;
+        Barre BarreReturn;
+        for (int i = 0; i < model.getlistbarre().size(); i++) {
+            BarreReturn = model.getlistbarre().get(i);
+            int id1 = model.getlistbarre().get(i).getId();
+            if (idB == id1) {
+                o = true;
+                
+                return model.getlistbarre().get(i);                
+            }
+        }
+        
+        return null;
+    } 
+    
     
     public MainPane(Treillis model) {
         this.model = model;
@@ -114,17 +148,25 @@ public class MainPane extends BorderPane {
             
         });
         int taille = 100;
+        
+        FileChooser fileChooser = new FileChooser();
         this.bSauvegarder = new Button("Sauvegarder");
-        this.bSauvegarder.setOnAction((t) -> {
-            File nom = new File("save.txt");
-            try {
-                this.model.sauvegarde(nom);  //Faire appara^^itre la fenêtre
-            } catch (IOException ex) {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setHeaderText("Probleme : " + ex.getLocalizedMessage());
-            }
-            
-        });
+//        this.bSauvegarder.setOnAction((t) -> {
+//            Stage stage = new Stage(); stage.setScene(new Scene(new Group(new Text(100,100, "Fenêtre de sauvegarde")))); 
+//            //stage.show();
+//            fileChooser.setTitle("Save");
+//            fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*", ".txt"));
+//            File selectedFile = fileChooser.showSaveDialog(stage);
+//
+//            //File nom = new File("save.txt");
+////            try {
+////                this.model.sauvegarde(nom);  //Faire apparaître la fenêtre
+////            } catch (IOException ex) {
+////                Alert a = new Alert(Alert.AlertType.ERROR);
+////                a.setHeaderText("Probleme : " + ex.getLocalizedMessage());
+////            }
+//            
+//        });
         this.bSauvegarder.setPrefWidth(taille);
         this.bOuvrir = new Button("Ouvrir");        
         this.bOuvrir.setPrefWidth(taille);
@@ -132,8 +174,7 @@ public class MainPane extends BorderPane {
         this.bSelectionner.setPrefWidth(taille);
         this.bGrouper = new Button("Grouper");
         this.bGrouper.setPrefWidth(taille);
-        this.bSupprimer = new Button("Supprimer");
-        this.bSupprimer.setPrefWidth(taille);
+     
         
         HBox hbHaut = new HBox();
         hbHaut.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
@@ -143,23 +184,37 @@ public class MainPane extends BorderPane {
         vbDroit.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setRight(vbDroit);
         
-        VBox vbGauche = new VBox(this.bSelectionner, this.bGrouper, this.bSupprimer);
+        VBox vbGauche = new VBox(this.bSelectionner, this.bGrouper);
         vbGauche.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setLeft(vbGauche);
         
+        
+        this.bSupprimerNoeud = new Button("Supprimer Noeud");
+        this.bSupprimerNoeud.setPrefWidth(taille+30);
+        this.bSupprimerBarre = new Button("Supprimer Barre");
+        this.bSupprimerBarre.setPrefWidth(taille+30);
+        
+        this.labelIDN = new Label();
+        this.labelIDN.setText(" Id Noeud : ");
+        this.txtIDN = new TextField();
+        this.txtIDN.setText("0");
+        this.txtIDN.setMaxWidth(50);
+        this.labelIDB = new Label();
+        this.labelIDB.setText(" Id Barre : ");
+        this.txtIDB = new TextField();
+        this.txtIDB.setText("0");
+        this.txtIDB.setMaxWidth(50);
+        
         this.labelx = new Label();
-        this.labelx.setText("pos x : ");
+        this.labelx.setText(" Pos x : ");
         this.txtFx = new TextField();
         this.txtFx.setText("0");
         this.txtFx.setMaxWidth(50);
         this.labely = new Label();
-        this.labely.setText("pos y : ");
+        this.labely.setText(" Pos y : ");
         this.txtFy = new TextField();
         this.txtFy.setText("0");
         this.txtFy.setMaxWidth(50);
-        
-        this.labelIdN = new Label();
-        this.labelIdN.setText(String.valueOf(getId())); //Faut-il le convertir ?
         
         this.bNoeudSimple = new Button("Noeud Simple");
         this.bNoeudSimple.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -169,12 +224,12 @@ public class MainPane extends BorderPane {
         this.bNoeudAppuiDouble.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
         
         this.labelND = new Label();
-        this.labelND.setText("Noeud de depart : ");
+        this.labelND.setText(" Noeud de départ : ");
         this.txtND = new TextField();
         this.txtND.setText("1");
         this.txtND.setMaxWidth(50);
         this.labelNA = new Label();
-        this.labelNA.setText("Noeud d'arrivee :   ");
+        this.labelNA.setText(" Noeud d'arrivée :   ");
         this.txtNA = new TextField();
         this.txtNA.setText("2");
         this.txtNA.setMaxWidth(50);
@@ -183,6 +238,12 @@ public class MainPane extends BorderPane {
         this.bBarre.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
         this.bBarre.setPrefWidth(taille);
         
+        HBox hbsn = new HBox(this.labelIDN, this.txtIDN);
+        VBox vbsn = new VBox(this.bSupprimerNoeud, hbsn);
+        vbsn.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
+        HBox hbsb = new HBox(this.labelIDB, this.txtIDB);
+        VBox vbsb = new VBox(this.bSupprimerBarre, hbsb);
+        vbsb.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         HBox hbpx = new HBox(this.labelx, this.txtFx);
         HBox hbpy = new HBox(this.labely, this.txtFy);
         HBox hbND = new HBox(this.labelND, this.txtND);
@@ -192,13 +253,14 @@ public class MainPane extends BorderPane {
         vbcc.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         VBox vbBarre = new VBox(this.bBarre, hbND, hbNA);
         vbBarre.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
-        HBox hbNoeud = new HBox(vbcc, vbBarre);
+        HBox hbNoeud = new HBox(vbcc, vbBarre, vbsn, vbsb);
         
         hbNoeud.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setBottom(hbNoeud);
         
         this.cDessin = new DessinCanvas(this);
         this.setCenter(this.cDessin);
+        
         
         this.bNoeudSimple.setOnAction(evt -> {
             Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), model.maxIdNoeud(model.getlistnoeud()) + 1);
@@ -245,6 +307,21 @@ public class MainPane extends BorderPane {
                     this.txtNA.setText("");
                 }
             }
+        });
+        
+        
+        this.bSupprimerNoeud.setOnAction(evt -> {
+            int IDNoeud = Integer.parseInt(this.txtIDN.getText());
+            //Noeud NoeudSupp = trouveNoeud(IDNoeud);
+            model.getlistnoeud().remove(IDNoeud-1);
+            this.cDessin.redrawAll();
+        });
+        
+        this.bSupprimerBarre.setOnAction(evt -> {
+            int IDBarre = Integer.parseInt(this.txtIDB.getText());
+            //Barre BarreSupp = trouveBarre(IDBarre);
+            model.getlistbarre().remove(IDBarre-1);
+            this.cDessin.redrawAll();
         });
         
     }
@@ -296,6 +373,10 @@ public class MainPane extends BorderPane {
      */
     public Treillis getModel() {
         return model;
+    }
+    
+    public Button getbSauvegarder() {
+        return bSauvegarder;
     }
     
 }//Fin 

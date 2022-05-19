@@ -10,6 +10,8 @@ import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.GREY;
+import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
 
 /**
@@ -67,9 +69,10 @@ public class Barre {
         Line barre = new Line(this.getNd().getPosx(), this.getNd().getPosy(), this.getNf().getPosx(), this.getNf().getPosy());
         barre.setStroke(Color.BLACK);
         barre.setFill(Color.BLACK);
-        Label nameB = new Label(this.id+"");
-        nameB.setLayoutX(this.getNd().getPosx() + 10);
-        nameB.setLayoutY(this.getNd().getPosy() + 10);
+        Label nameB = new Label("B"+this.id+"");
+        nameB.setTextFill(RED);
+        nameB.setLayoutX((this.getNd().getPosx()+this.getNf().getPosx())/2 +10 );
+        nameB.setLayoutY((this.getNd().getPosy()+this.getNf().getPosy())/2 );
         Group gb = new Group(barre, nameB);
         return gb;
     }

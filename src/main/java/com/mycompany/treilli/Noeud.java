@@ -175,7 +175,7 @@ public abstract class Noeud {
         Ellipse res = new Ellipse(this.posx, this.posy, TAILLE_NOEUD, TAILLE_NOEUD);
         res.setStroke(this.color);
         res.setFill(this.color);
-        Label nameN = new Label(this.id+"");
+        Label nameN = new Label("N"+this.id+"");
         nameN.setLayoutX(this.posx);
         nameN.setLayoutY(this.posy + 10);
         Group g = new Group(res,nameN);

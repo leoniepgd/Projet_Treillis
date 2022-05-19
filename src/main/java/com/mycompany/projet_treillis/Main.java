@@ -26,14 +26,10 @@ public class Main extends Application {
         primaryStage.setTitle("TREILLIS");  // nom de la fenetre
         List<Noeud> n = new ArrayList<Noeud>();
         List<Barre> b = new ArrayList<Barre>() ;
-        Treillis model = new Treillis( n, b);
+        Treillis model = new Treillis(n, b);
         MainPane mp = new MainPane(model); 
         Scene scene = new Scene(mp,800,600);  // Soit FlowPaneExemple ou HBoxExemple ou BorderPaneExemple ou MainPane
 
-        
-        
-   
-        
         primaryStage.setScene(scene);
         primaryStage.show();
     }
