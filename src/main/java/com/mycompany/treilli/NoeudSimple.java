@@ -5,6 +5,7 @@
 package com.mycompany.treilli;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
 import javafx.scene.paint.Color;
 
@@ -12,26 +13,26 @@ import javafx.scene.paint.Color;
  *
  * @author yannp
  */
-public class NoeudSimple extends Noeud {
+public class NoeudSimple extends Noeud implements Serializable  {
 
     public NoeudSimple(double posx, double posy, Vecteur2D force, int identificateur) { //Constructeur 1
         super(identificateur, posx, posy, force);
-        this.color = Color.GREEN;
+        this.color = 3;
     }
 
     public NoeudSimple(double posx, double posy, Vecteur2D force) { // Constructeur 2
         super(posx, posy, force);
-        this.color = Color.GREEN;
+        this.color = 3;
     }
 
     public NoeudSimple(double posx, double posy) { // Constructeur 3
         super(posx, posy);
-        this.color = Color.GREEN;
+        this.color = 3;
     }
 
     public NoeudSimple(double posx, double posy, int identificateur) { // Constructeur 3
         super(identificateur, posx, posy);
-        this.color = Color.GREEN;
+        this.color = 3;
     }
 
     @Override

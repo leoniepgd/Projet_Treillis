@@ -5,6 +5,7 @@
 package com.mycompany.treilli;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
 import javafx.scene.paint.Color;
 
@@ -12,17 +13,17 @@ import javafx.scene.paint.Color;
  *
  * @author yannp
  */
-public class NoeudAppuiSimple extends NoeudAppui {
+public class NoeudAppuiSimple extends NoeudAppui implements Serializable  {
 
 	
     NoeudAppuiSimple(double posx, double posy) {
         super(posx, posy);
-        this.color = Color.BLUE; 
+        this.color = 2; 
     }
     
     public NoeudAppuiSimple(int identificateur,double posx, double posy) {
         super(identificateur, posx, posy);
-        this.color = Color.BLUE;
+        this.color = 2;
     }
 
     @Override

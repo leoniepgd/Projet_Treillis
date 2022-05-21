@@ -4,11 +4,13 @@
  */
 package com.mycompany.treilli;
 
+import java.io.Serializable;
+
 /**
  *
  * @author yannp
  */
-public abstract class NoeudAppui extends Noeud {
+public abstract class NoeudAppui extends Noeud implements Serializable {
 
     NoeudAppui(double posx, double posy) {
         super(posx, posy);

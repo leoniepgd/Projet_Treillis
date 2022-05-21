@@ -6,45 +6,61 @@ package com.mycompany.treilli;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.Writer;
 import java.util.List;
+
 
 /**
  *
  * @author yannp
+ * 
+ * 
  */
-public class Treillis {
-   // Atributs
-    public List<Barre> listbarre;
-    public List<Noeud> listnoeud;
-    
-    
+
+public class Treillis implements Serializable {
+	// Atributs
+ 
+	private List<Noeud> listnoeud;
+
+	public void setListnoeud(List<Noeud> listnoeud) {
+		this.listnoeud = listnoeud;
+	}
+
+	public List<Noeud> getListnoeud() {
+		return listnoeud;
+	}
+	
+    private List<Barre> listbarre;
+	
+
+	public List<Barre> getListbarre() {
+		return listbarre;
+	}
+
+
+	public void setListbarre(List<Barre> listbarre) {
+		this.listbarre = listbarre;
+	}
+
+
     //Constructeur
     
     public Treillis ( List <Noeud> n, List <Barre> b){
         this.listbarre= b;
         this.listnoeud=n;
     }
-    
-    
-   public List <Barre> getlistbarre(){
-       return listbarre;
-   }
-   public List <Noeud>  getlistnoeud(){
-       return listnoeud;
-   }
-   public void setlistbarre(List <Barre> b2){
-       this.listbarre= b2;
-   }
-   public void setlistnoeud (List <Noeud>  n2){
-       this.listnoeud=n2;
-   }
+
    
    @Override
    public String toString() {
-        return ("liste des noeuds " + this.getlistnoeud() + "   liste des barres" + this.getlistbarre());
+        return ("liste des noeuds " + this.getListnoeud() + "   liste des barres" + this.getListbarre());
     }
    public static int maxIdNoeud (List <Noeud>  n){
       int maxid=0;
@@ -89,17 +105,6 @@ public class Treillis {
            t.add(nouvellebarre);   
        }
     }
-   
-    public void save(Writer w) throws IOException {
-        
-        // w.close();
-    }
-    
-    public void sauvegarde(File fout) throws IOException {
-        BufferedWriter bout = new BufferedWriter(new FileWriter(fout));
-        this.save(bout);
-    }
-
-
+      
    
 }

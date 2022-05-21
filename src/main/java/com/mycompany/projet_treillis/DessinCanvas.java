@@ -40,12 +40,12 @@ public class DessinCanvas extends Pane {
 //        context.fillRect(0, 0, this.realCanvas.getWidth(), this.realCanvas.getHeight());  // pour obtenir la taille en temps réel du canvas
         this.getChildren().clear();
         Treillis model = this.main.getModel();
-        for (int i = 0; i < model.getlistnoeud().size(); i++) {
-            Group rep = model.getlistnoeud().get(i).dessine();
+        for (int i = 0; i < model.getListnoeud().size(); i++) {
+            Group rep = model.getListnoeud().get(i).dessine();
             this.getChildren().add(rep);
         }
-        for (int i = 0; i < model.getlistbarre().size(); i++) {
-            Group rep = model.getlistbarre().get(i).Barredessine();
+        for (int i = 0; i < model.getListbarre().size(); i++) {
+            Group rep = model.getListbarre().get(i).Barredessine();
             this.getChildren().add(rep);
         
         }

@@ -4,11 +4,13 @@
  */
 package com.mycompany.treilli;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Elève
  */
-public class Triangle {
+public class Triangle implements Serializable   {
     
     //Variables globales
     

@@ -6,6 +6,8 @@ package com.mycompany.treilli;
 
 import static com.mycompany.treilli.Treillis.maxIdBarre;
 import static com.mycompany.treilli.Treillis.maxIdNoeud;
+
+import java.io.Serializable;
 import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -18,7 +20,7 @@ import javafx.scene.shape.Line;
  *
  * @author yannp
  */
-public class Barre {
+public class Barre implements Serializable  {
  
     // Attributs
     private int id;
@@ -27,7 +29,7 @@ public class Barre {
     private double tractionmax;
     private double compressionmax;
     private double prix;
-    protected Color color;
+    protected int color;
 
     //Constructeur
     Barre(Noeud n1, Noeud n2, int i, double t, double c, double p) {
@@ -37,7 +39,7 @@ public class Barre {
         this.compressionmax = c;
         this.id = i;
         this.prix = p;
-        this.color = Color.BLUE;
+        this.color = 2;
     }
     
     Barre (Noeud n1, int i, double t, double c, double p){
@@ -46,7 +48,7 @@ public class Barre {
         this.compressionmax = c;
         this.id = i;
         this.prix = p; 
-        this.color = Color.BLUE;
+        this.color = 2;
     }
     
     public Barre (Noeud n1, Noeud n2, int i){
@@ -56,6 +58,22 @@ public class Barre {
     }
     
    
+    private Color getColor (int code) {
+    	switch (code) {
+    	case 0 : return Color.BLACK;
+    			
+    	case 1 : return Color.YELLOW;
+
+    	case 2 : return Color.BLUE;
+    			
+    	case 3 : return Color.GREEN;
+    
+    	case 4 : return Color.RED;
+        
+    	}
+    	
+    	return Color.BLACK;
+    }
     // Méthode get et set
     // Méthode toString (renvoie tout en chaÃ®ne de caractÃ¨re)
     @Override //Permet de modifer la mÃ©thode toString dÃ©jÃ  dÃ©fini dans Java
@@ -67,10 +85,10 @@ public class Barre {
     public Group Barredessine() {
     	System.out.printf("Dessin de la Barre id : %s - (x : %s - y : %s) - (x : %s - y : %s)\n",getId(), this.getNd().getPosx(),this.getNd().getPosy(),this.getNf().getPosx(), this.getNf().getPosy());
         Line barre = new Line(this.getNd().getPosx(), this.getNd().getPosy(), this.getNf().getPosx(), this.getNf().getPosy());
-        barre.setStroke(Color.BLACK);
-        barre.setFill(Color.BLACK);
+        barre.setStroke(getColor(2));
+        barre.setFill(getColor(2));
         Label nameB = new Label("B"+this.id+"");
-        nameB.setTextFill(RED);
+        nameB.setTextFill(getColor(4));
         nameB.setLayoutX((this.getNd().getPosx()+this.getNf().getPosx())/2 +10 );
         nameB.setLayoutY((this.getNd().getPosy()+this.getNf().getPosy())/2 );
         Group gb = new Group(barre, nameB);

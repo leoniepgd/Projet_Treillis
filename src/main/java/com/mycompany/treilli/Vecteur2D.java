@@ -4,11 +4,13 @@
  */
 package com.mycompany.treilli;
 
+import java.io.Serializable;
+
 /**
  *
  * @author yannp
  */
-public class Vecteur2D {
+public class Vecteur2D implements Serializable   {
 
     // Attributs
     private double vx;

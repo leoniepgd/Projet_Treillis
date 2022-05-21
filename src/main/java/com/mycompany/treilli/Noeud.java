@@ -5,6 +5,7 @@
 package com.mycompany.treilli;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import javafx.scene.shape.Ellipse;
  *
  * @author yannp
  */
-public abstract class Noeud {
+public abstract class Noeud implements Serializable  {
     
     // Attibuts
     private int id;
@@ -31,7 +32,7 @@ public abstract class Noeud {
     private static final double TAILLE_NOEUD = 10;
 
     
-    protected Color color;
+    protected int color;
     // Constructeur 1
     Noeud(int n, double x, double y, Vecteur2D f) {
         this.id = n;
@@ -40,7 +41,7 @@ public abstract class Noeud {
         this.force = f;
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
-        this.color = Color.BLACK;
+        this.color = 0;
 
     }
 
@@ -52,7 +53,7 @@ public abstract class Noeud {
         this.force = f;
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
-        this.color = Color.BLACK;
+        this.color = 0;
     }
 
     // Constructeur 3
@@ -63,7 +64,7 @@ public abstract class Noeud {
         this.force = new Vecteur2D(0, 0);
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
-        this.color = Color.BLACK;
+        this.color = 0;
     }
 
     // Constructeur 4
@@ -74,7 +75,7 @@ public abstract class Noeud {
         this.force = new Vecteur2D(0, 0);
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
-        this.color = Color.BLACK;
+        this.color = 0;
     }
 
     
@@ -170,11 +171,24 @@ public abstract class Noeud {
         this.barresArrivee = barresArrivee;
     }
  
+    private Color getColor (int code) {
+    	switch (code) {
+    	case 0 : return Color.BLACK;
+    			
+    	case 1 : return Color.YELLOW;
+
+    	case 2 : return Color.BLUE;
+    			
+    	case 3 : return Color.GREEN;
+    	}
+    	
+    	return Color.BLACK;
+    }
     
     public Group dessine() {
         Ellipse res = new Ellipse(this.posx, this.posy, TAILLE_NOEUD, TAILLE_NOEUD);
-        res.setStroke(this.color);
-        res.setFill(this.color);
+        res.setStroke(getColor(this.color));
+        res.setFill(getColor(this.color));
         Label nameN = new Label("N"+this.id+"");
         nameN.setLayoutX(this.posx);
         nameN.setLayoutY(this.posy + 10);

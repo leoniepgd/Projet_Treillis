@@ -4,14 +4,24 @@
  */
 package com.mycompany.projet_treillis;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.treilli.Barre;
 import com.mycompany.treilli.Noeud;
 import com.mycompany.treilli.NoeudAppuiDouble;
 import com.mycompany.treilli.NoeudAppuiSimple;
 import com.mycompany.treilli.NoeudSimple;
 import com.mycompany.treilli.Treillis;
+
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.List;
 import javafx.event.ActionEvent;
@@ -59,6 +69,10 @@ public class MainPane extends BorderPane {
     
     private Button bGrouper;
     private Button bSelectionner;
+    
+    private Label labelFileName;
+    private TextField txtFileName;
+    
     private Button bSauvegarder;
     private Button bOuvrir;
     private Button bSupprimerNoeud;
@@ -88,13 +102,13 @@ public class MainPane extends BorderPane {
     public Noeud trouveNoeud(int idNd) {
         boolean o = false;
         Noeud NoeudReturn;
-        for (int i = 0; i < model.getlistnoeud().size(); i++) {
-            NoeudReturn = model.getlistnoeud().get(i);
-            int id1 = model.getlistnoeud().get(i).getId();
+        for (int i = 0; i < model.getListnoeud().size(); i++) {
+            NoeudReturn = model.getListnoeud().get(i);
+            int id1 = model.getListnoeud().get(i).getId();
             if (idNd == id1) {
                 o = true;
                 
-                return model.getlistnoeud().get(i);                
+                return model.getListnoeud().get(i);                
             }
         }
         
@@ -104,13 +118,13 @@ public class MainPane extends BorderPane {
         public Barre trouveBarre(int idB) {
         boolean o = false;
         Barre BarreReturn;
-        for (int i = 0; i < model.getlistbarre().size(); i++) {
-            BarreReturn = model.getlistbarre().get(i);
-            int id1 = model.getlistbarre().get(i).getId();
+        for (int i = 0; i < model.getListbarre().size(); i++) {
+            BarreReturn = model.getListbarre().get(i);
+            int id1 = model.getListbarre().get(i).getId();
             if (idB == id1) {
                 o = true;
                 
-                return model.getlistbarre().get(i);                
+                return model.getListbarre().get(i);                
             }
         }
         
@@ -129,10 +143,32 @@ public class MainPane extends BorderPane {
                 System.out.println("Bouton grouper cliqué");
             }
         });
+        
+        this.labelFileName = new Label();
+        this.labelFileName.setText("Nom fichier : ");
+        txtFileName = new TextField("noeuds");
       
         FileChooser fileChooser = new FileChooser();
         this.bSauvegarder = new Button("Sauvegarder");
-//        this.bSauvegarder.setOnAction((t) -> {
+        this.bSauvegarder.setOnAction(evt -> {
+        	String file = this.txtFileName.getText();
+        	try {
+        		FileOutputStream fos = new FileOutputStream(file);
+        		ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        		// write object to file
+        		oos.writeObject(this.model);
+
+        		// close writer
+        		oos.close();
+        	} catch (Exception e) {
+        		   System.out.println("Erreur Sauvegarderà la création du fichier : " + file);
+        	}
+        });
+
+
+            
+       //        this.bSauvegarder.setOnAction((t) -> {
 //            Stage stage = new Stage(); stage.setScene(new Scene(new Group(new Text(100,100, "Fenêtre de sauvegarde")))); 
 //            //stage.show();
 //            fileChooser.setTitle("Save");
@@ -151,6 +187,29 @@ public class MainPane extends BorderPane {
         this.bSauvegarder.setPrefWidth(taille);
         this.bOuvrir = new Button("Ouvrir");        
         this.bOuvrir.setPrefWidth(taille);
+        
+        this.bOuvrir.setOnAction(evt -> {
+        	String file = this.txtFileName.getText();  
+        	try {
+				   FileInputStream fi = new FileInputStream(file);
+					ObjectInputStream oi = new ObjectInputStream(fi);
+
+				    // write object to file
+					Treillis m = (Treillis) oi.readObject();
+
+				    // close writer
+				    oi.close();
+
+				    this.model = m;
+				    this.cDessin.redrawAll();
+				   
+				} catch (Exception e) {
+					   System.out.println("Erreur à la lecture du fichier : " + file);
+				}
+        });
+        
+
+        
         this.bSelectionner = new Button("Sélectionner");
         this.bSelectionner.setPrefWidth(taille);
         this.bGrouper = new Button("Grouper");
@@ -161,7 +220,7 @@ public class MainPane extends BorderPane {
         hbHaut.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setTop(hbHaut);
         
-        VBox vbDroit = new VBox(this.bSauvegarder, this.bOuvrir);
+        VBox vbDroit = new VBox(this.labelFileName,this.txtFileName,this.bSauvegarder, this.bOuvrir);
         vbDroit.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setRight(vbDroit);
         
@@ -226,7 +285,14 @@ public class MainPane extends BorderPane {
         VBox vbsb = new VBox(this.bSupprimerBarre, hbsb);
         vbsb.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         HBox hbpx = new HBox(this.labelx, this.txtFx);
-        HBox hbpy = new HBox(this.labely, this.txtFy);
+        HBox hbpy = new HBox(this.labely, this.txtFy);        this.bNoeudSimple.setOnAction(evt -> {
+            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), model.maxIdNoeud(model.getListnoeud()) + 1);
+            model.ajouteNoeud(model.getListnoeud(), nd);
+            // Pour dessiner
+            this.cDessin.getChildren().add(nd.dessine());
+            System.out.printf("Bouton Noeud Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
+        });
+
         HBox hbND = new HBox(this.labelND, this.txtND);
         HBox hbNA = new HBox(this.labelNA, this.txtNA);
         HBox hbButton = new HBox(this.bNoeudSimple, this.bNoeudAppuiSimple, this.bNoeudAppuiDouble);
@@ -243,24 +309,24 @@ public class MainPane extends BorderPane {
         
         
         this.bNoeudSimple.setOnAction(evt -> {
-            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), model.maxIdNoeud(model.getlistnoeud()) + 1);
-            model.ajouteNoeud(model.getlistnoeud(), nd);
+            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), model.maxIdNoeud(model.getListnoeud()) + 1);
+            model.ajouteNoeud(model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
         });
         
         this.bNoeudAppuiSimple.setOnAction(evt -> {
-            Noeud nd = new NoeudAppuiSimple(model.maxIdNoeud(model.getlistnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
-            model.ajouteNoeud(model.getlistnoeud(), nd);
+            Noeud nd = new NoeudAppuiSimple(model.maxIdNoeud(model.getListnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
+            model.ajouteNoeud(model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Appui Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
         });
         
         this.bNoeudAppuiDouble.setOnAction(evt -> {
-            Noeud nd = new NoeudAppuiDouble(model.maxIdNoeud(model.getlistnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
-            model.ajouteNoeud(model.getlistnoeud(), nd);
+            Noeud nd = new NoeudAppuiDouble(model.maxIdNoeud(model.getListnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
+            model.ajouteNoeud(model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Appui Double id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
@@ -273,8 +339,8 @@ public class MainPane extends BorderPane {
             int idNf = Integer.parseInt(this.txtNA.getText());
             Noeud Nf = trouveNoeud(idNf);
             if (Nd != null && Nf != null) {
-                Barre b = new Barre(Nd, Nf, model.maxIdBarre(model.getlistbarre()) + 1);
-                model.ajouteBarre(model.getlistbarre(),b);
+                Barre b = new Barre(Nd, Nf, model.maxIdBarre(model.getListbarre()) + 1);
+                model.ajouteBarre(model.getListbarre(),b);
                 //Pour dessiner
                 this.cDessin.getChildren().add(b.Barredessine());
                 System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n", b.getId(), b.getNd(), b.getNf());
@@ -293,14 +359,14 @@ public class MainPane extends BorderPane {
         this.bSupprimerNoeud.setOnAction(evt -> {
             int IDNoeud = Integer.parseInt(this.txtIDN.getText());
             //Noeud NoeudSupp = trouveNoeud(IDNoeud);
-            model.getlistnoeud().remove(IDNoeud-1);
+            model.getListnoeud().remove(IDNoeud-1);
             this.cDessin.redrawAll();
         });
         
         this.bSupprimerBarre.setOnAction(evt -> {
             int IDBarre = Integer.parseInt(this.txtIDB.getText());
             //Barre BarreSupp = trouveBarre(IDBarre);
-            model.getlistbarre().remove(IDBarre-1);
+            model.getListbarre().remove(IDBarre-1);
             this.cDessin.redrawAll();
         });
         
