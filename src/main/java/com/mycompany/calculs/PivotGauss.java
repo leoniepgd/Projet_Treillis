@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package calculs;
+package com.mycompany.calculs;
 
 
 import com.mycompany.treilli.Lire;
@@ -10,7 +10,6 @@ import com.mycompany.treilli.Lire;
 /**
  *
  * @author Elève
- */
 /* Resolution d'un systeme de n equations      */
 /* lineaires a n inconnues                     */
 /* par la methode du pivot de Gauss            */
@@ -196,13 +195,21 @@ public class PivotGauss {
 
   public static void main(String [] args) {
     int i,j;
-    int nc, nl;
+    int nc, nl, nas, nad, ns, ba, n;
     Matrice m;
+    System.out.println("donner le nombre de noeud appui simple");
+    nas = Lire.i();
+    System.out.println("donner le nombre de noeud appui double");
+    nad = Lire.i();
+    System.out.println("donner le nombre de noeud simple");
+    ns = Lire.i();
+    System.out.println("donner le nombre de barres");
+    ba = Lire.i();
    
-    System.out.println("donnez le nombre de ligne");
-    nl = Lire.i();
-    System.out.println("donnez le nombre de colonne");
-    nc = Lire.i();
+    n = (nas*3)+(nad*4)+(ns*2)-ba;
+    nl = n;
+    nc = n;
+   
     double[] b = new double[nc];
     m = new Matrice(nl,nc);
     for (i=0; i<nl; i++){

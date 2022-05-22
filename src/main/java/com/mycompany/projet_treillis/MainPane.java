@@ -77,7 +77,7 @@ public class MainPane extends BorderPane {
     private Button bOuvrir;
     private Button bSupprimerNoeud;
     private Button bSupprimerBarre;
-    
+    private Button bForce ;
     private Button bNoeudSimple;
     private Button bNoeudAppuiSimple;
     private Button bNoeudAppuiDouble;
@@ -184,6 +184,7 @@ public class MainPane extends BorderPane {
 ////            }
 //            
 //        });
+        
         this.bSauvegarder.setPrefWidth(taille);
         this.bOuvrir = new Button("Ouvrir");        
         this.bOuvrir.setPrefWidth(taille);
@@ -214,7 +215,8 @@ public class MainPane extends BorderPane {
         this.bSelectionner.setPrefWidth(taille);
         this.bGrouper = new Button("Grouper");
         this.bGrouper.setPrefWidth(taille);
-     
+        this.bForce = new Button("Force");
+        this.bForce.setPrefWidth(taille);
         
         HBox hbHaut = new HBox();
         hbHaut.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
@@ -300,7 +302,7 @@ public class MainPane extends BorderPane {
         vbcc.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         VBox vbBarre = new VBox(this.bBarre, hbND, hbNA);
         vbBarre.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
-        HBox hbNoeud = new HBox(vbcc, vbBarre, vbsn, vbsb);
+        HBox hbNoeud = new HBox(vbcc, vbBarre, vbsn, vbsb, this.bForce);
         hbNoeud.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setBottom(hbNoeud);
         
