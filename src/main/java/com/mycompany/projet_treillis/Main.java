@@ -23,12 +23,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setWidth(1000);
         primaryStage.setHeight(700);
-        primaryStage.setTitle("TREILLIS");  // nom de la fenetre
+        primaryStage.setTitle("TREILLIS");  
         List<Noeud> n = new ArrayList<Noeud>();
         List<Barre> b = new ArrayList<Barre>() ;
         Treillis model = new Treillis(n, b);
         MainPane mp = new MainPane(model); 
-        Scene scene = new Scene(mp,800,600);  // Soit FlowPaneExemple ou HBoxExemple ou BorderPaneExemple ou MainPane
+        Scene scene = new Scene(mp,800,600); // Soit FlowPaneExemple ou HBoxExemple ou BorderPaneExemple ou MainPane
 
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -59,11 +59,6 @@ import javafx.stage.Stage;
  */
 public class MainPane extends BorderPane {
 
-    /**
-     * @return the bSauvegarder
-     */
-
-
     //private Groupe model;
     private Treillis model;
     
@@ -99,6 +94,7 @@ public class MainPane extends BorderPane {
     
     private DessinCanvas cDessin;
     
+    
     public Noeud trouveNoeud(int idNd) {
         boolean o = false;
         Noeud NoeudReturn;
@@ -107,11 +103,9 @@ public class MainPane extends BorderPane {
             int id1 = this.model.getListnoeud().get(i).getId();
             if (idNd == id1) {
                 o = true;
-                
                 return this.model.getListnoeud().get(i);                
             }
         }
-        
         return null;
     }    
     
@@ -123,17 +117,15 @@ public class MainPane extends BorderPane {
             int id1 = this.model.getListbarre().get(i).getId();
             if (idB == id1) {
                 o = true;
-                
                 return this.model.getListbarre().get(i);                
             }
         }
-        
         return null;
     } 
     
     
     public MainPane(Treillis _model) {
-        this.model = _model;;
+        this.model = _model;
         int taille = 100;
         
         this.bGrouper = new Button("Grouper");
@@ -156,35 +148,14 @@ public class MainPane extends BorderPane {
         		FileOutputStream fos = new FileOutputStream(file);
         		ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-        		// write object to file
         		oos.writeObject(this.model);
 
-        		// close writer
         		oos.close();
         	} catch (Exception e) {
-        		   System.out.println("Erreur Sauvegarderà la création du fichier : " + file);
+        		   System.out.println("Erreur Sauvegarder à la création du fichier : " + file);
         	}
         });
 
-
-            
-       //        this.bSauvegarder.setOnAction((t) -> {
-//            Stage stage = new Stage(); stage.setScene(new Scene(new Group(new Text(100,100, "Fenêtre de sauvegarde")))); 
-//            //stage.show();
-//            fileChooser.setTitle("Save");
-//            fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*", ".txt"));
-//            File selectedFile = fileChooser.showSaveDialog(stage);
-//
-//            //File nom = new File("save.txt");
-////            try {
-////                this.model.sauvegarde(nom);  //Faire apparaître la fenêtre
-////            } catch (IOException ex) {
-////                Alert a = new Alert(Alert.AlertType.ERROR);
-////                a.setHeaderText("Probleme : " + ex.getLocalizedMessage());
-////            }
-//            
-//        });
-        
         this.bSauvegarder.setPrefWidth(taille);
         this.bOuvrir = new Button("Ouvrir");        
         this.bOuvrir.setPrefWidth(taille);
@@ -192,25 +163,22 @@ public class MainPane extends BorderPane {
         this.bOuvrir.setOnAction(evt -> {
         	String file = this.txtFileName.getText();  
         	try {
-				   FileInputStream fi = new FileInputStream(file);
-					ObjectInputStream oi = new ObjectInputStream(fi);
+                        FileInputStream fi = new FileInputStream(file);
+			ObjectInputStream oi = new ObjectInputStream(fi);
 
-				    // write object to file
-					Treillis m = (Treillis) oi.readObject();
+			Treillis m = (Treillis) oi.readObject();
 
-				    // close writer
-				    oi.close();
+			oi.close();
 
-				    this.model = m;
-				    this.cDessin.redrawAll();
-				   
-				} catch (Exception e) {
-					   System.out.println("Erreur à la lecture du fichier : " + file);
-				}
+			this.model = m;
+			this.cDessin.redrawAll();	   
+			} 
+                        catch (Exception e) {
+				System.out.println("Erreur à la lecture du fichier : " + file);
+			}
         });
         
 
-        
         this.bSelectionner = new Button("Sélectionner");
         this.bSelectionner.setPrefWidth(taille);
         this.bGrouper = new Button("Grouper");
@@ -229,7 +197,6 @@ public class MainPane extends BorderPane {
         VBox vbGauche = new VBox(this.bSelectionner, this.bGrouper);
         vbGauche.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         this.setLeft(vbGauche);
-        
         
         this.bSupprimerNoeud = new Button("Supprimer Noeud");
         this.bSupprimerNoeud.setPrefWidth(taille+30);
@@ -287,14 +254,8 @@ public class MainPane extends BorderPane {
         VBox vbsb = new VBox(this.bSupprimerBarre, hbsb);
         vbsb.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         HBox hbpx = new HBox(this.labelx, this.txtFx);
-        HBox hbpy = new HBox(this.labely, this.txtFy);        this.bNoeudSimple.setOnAction(evt -> {
-            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), this.model.maxIdNoeud(this.model.getListnoeud()) + 1);
-            this.model.ajouteNoeud(this.model.getListnoeud(), nd);
-            // Pour dessiner
-            this.cDessin.getChildren().add(nd.dessine());
-            System.out.printf("Bouton Noeud Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
-        });
-
+        HBox hbpy = new HBox(this.labely, this.txtFy);        
+        
         HBox hbND = new HBox(this.labelND, this.txtND);
         HBox hbNA = new HBox(this.labelNA, this.txtNA);
         HBox hbButton = new HBox(this.bNoeudSimple, this.bNoeudAppuiSimple, this.bNoeudAppuiDouble);
@@ -356,7 +317,6 @@ public class MainPane extends BorderPane {
                 }
             }
         });
-        
         
         this.bSupprimerNoeud.setOnAction(evt -> {
             int IDNoeud = Integer.parseInt(this.txtIDN.getText());

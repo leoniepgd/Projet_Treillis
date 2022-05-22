@@ -13,7 +13,6 @@ import java.io.Serializable;
 public class Triangle implements Serializable   {
     
     //Variables globales
-    
     public static int id;
     public static double xP1;
     public static double yP1;
@@ -23,7 +22,6 @@ public class Triangle implements Serializable   {
     public static double yP3;
     
     //Constructeur
-    
     public Triangle (int id, double xP1, double yP1, double xP2, double yP2,double xP3, double yP3){
         this.id=id;
         this.xP1=xP1;
@@ -35,7 +33,6 @@ public class Triangle implements Serializable   {
     }
     
     //Fonctions & méthodes
-    
     public double getx(int point){
         if (point==1){
             return xP1;
@@ -63,7 +60,6 @@ public class Triangle implements Serializable   {
     }
     
     //Get et set
-    
     public double getxP1(){
         return this.xP1;
     }

@@ -51,7 +51,6 @@ public class Treillis implements Serializable {
 
 
     //Constructeur
-    
     public Treillis ( List <Noeud> n, List <Barre> b){
         this.listbarre= b;
         this.listnoeud=n;
@@ -106,5 +105,4 @@ public class Treillis implements Serializable {
        }
     }
       
-   
 }

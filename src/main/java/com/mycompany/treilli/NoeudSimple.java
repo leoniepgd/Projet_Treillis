@@ -30,7 +30,7 @@ public class NoeudSimple extends Noeud implements Serializable  {
         this.color = 3;
     }
 
-    public NoeudSimple(double posx, double posy, int identificateur) { // Constructeur 3
+    public NoeudSimple(double posx, double posy, int identificateur) { // Constructeur 4
         super(identificateur, posx, posy);
         this.color = 3;
     }

@@ -11,7 +11,6 @@ package com.mycompany.treilli;
 public class Terrain {
     
     //Variables globales
-    
     public static int id;
     public static double xMin;
     public static double xMax;
@@ -19,7 +18,6 @@ public class Terrain {
     public static double yMax;
     
     //Constructeur
-    
     public Terrain(int id, double xmin, double xmax, double ymin, double ymax){
         this.id=id;
         this.xMin=xmin;
@@ -29,7 +27,6 @@ public class Terrain {
     }
     
     //Get et set
-    
     public double getxMin(){
         return this.xMin;
     }

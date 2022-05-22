@@ -12,7 +12,6 @@ import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.GREY;
 import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
 
@@ -75,8 +74,8 @@ public class Barre implements Serializable  {
     	return Color.BLACK;
     }
     // Méthode get et set
-    // Méthode toString (renvoie tout en chaÃ®ne de caractÃ¨re)
-    @Override //Permet de modifer la mÃ©thode toString dÃ©jÃ  dÃ©fini dans Java
+    // Méthode toString (renvoie tout en chaîne de caractère)
+    @Override //Permet de modifer la méthode toString déjà  défini dans Java
     public String toString() {
         return ("noeud du début" + this.getNd() + "   noeud de fin" + this.getNf() + "   id  " + this.getId());
     }

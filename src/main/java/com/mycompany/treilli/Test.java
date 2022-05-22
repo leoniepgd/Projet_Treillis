@@ -18,7 +18,6 @@ public class Test {
     public static void main(String[] args) {
         Noeud n1 = entreeNoeud();
         System.out.println(n1 + " " + n1.nbrInconnues() + " inconnues");
-
     }
 
     public static Noeud entreeNoeud() {

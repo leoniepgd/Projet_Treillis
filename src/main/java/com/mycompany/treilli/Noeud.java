@@ -30,9 +30,9 @@ public abstract class Noeud implements Serializable  {
     private List<Barre> barresArrivee;
     
     private static final double TAILLE_NOEUD = 10;
-
     
     protected int color;
+    
     // Constructeur 1
     Noeud(int n, double x, double y, Vecteur2D f) {
         this.id = n;
@@ -42,7 +42,6 @@ public abstract class Noeud implements Serializable  {
         this.barresDepart = new ArrayList<>();
         this.barresArrivee = new ArrayList<>();
         this.color = 0;
-
     }
 
     // Constructeur 2
