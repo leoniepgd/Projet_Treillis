@@ -102,13 +102,13 @@ public class MainPane extends BorderPane {
     public Noeud trouveNoeud(int idNd) {
         boolean o = false;
         Noeud NoeudReturn;
-        for (int i = 0; i < model.getListnoeud().size(); i++) {
-            NoeudReturn = model.getListnoeud().get(i);
-            int id1 = model.getListnoeud().get(i).getId();
+        for (int i = 0; i < this.model.getListnoeud().size(); i++) {
+            NoeudReturn = this.model.getListnoeud().get(i);
+            int id1 = this.model.getListnoeud().get(i).getId();
             if (idNd == id1) {
                 o = true;
                 
-                return model.getListnoeud().get(i);                
+                return this.model.getListnoeud().get(i);                
             }
         }
         
@@ -118,13 +118,13 @@ public class MainPane extends BorderPane {
         public Barre trouveBarre(int idB) {
         boolean o = false;
         Barre BarreReturn;
-        for (int i = 0; i < model.getListbarre().size(); i++) {
-            BarreReturn = model.getListbarre().get(i);
-            int id1 = model.getListbarre().get(i).getId();
+        for (int i = 0; i < this.model.getListbarre().size(); i++) {
+            BarreReturn = this.model.getListbarre().get(i);
+            int id1 = this.model.getListbarre().get(i).getId();
             if (idB == id1) {
                 o = true;
                 
-                return model.getListbarre().get(i);                
+                return this.model.getListbarre().get(i);                
             }
         }
         
@@ -132,8 +132,8 @@ public class MainPane extends BorderPane {
     } 
     
     
-    public MainPane(Treillis model) {
-        this.model = model;;
+    public MainPane(Treillis _model) {
+        this.model = _model;;
         int taille = 100;
         
         this.bGrouper = new Button("Grouper");
@@ -288,8 +288,8 @@ public class MainPane extends BorderPane {
         vbsb.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null)));
         HBox hbpx = new HBox(this.labelx, this.txtFx);
         HBox hbpy = new HBox(this.labely, this.txtFy);        this.bNoeudSimple.setOnAction(evt -> {
-            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), model.maxIdNoeud(model.getListnoeud()) + 1);
-            model.ajouteNoeud(model.getListnoeud(), nd);
+            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), this.model.maxIdNoeud(this.model.getListnoeud()) + 1);
+            this.model.ajouteNoeud(this.model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
@@ -311,16 +311,16 @@ public class MainPane extends BorderPane {
         
         
         this.bNoeudSimple.setOnAction(evt -> {
-            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), model.maxIdNoeud(model.getListnoeud()) + 1);
-            model.ajouteNoeud(model.getListnoeud(), nd);
+            Noeud nd = new NoeudSimple(Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()), this.model.maxIdNoeud(this.model.getListnoeud()) + 1);
+            this.model.ajouteNoeud(this.model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
         });
         
         this.bNoeudAppuiSimple.setOnAction(evt -> {
-            Noeud nd = new NoeudAppuiSimple(model.maxIdNoeud(model.getListnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
-            model.ajouteNoeud(model.getListnoeud(), nd);
+            Noeud nd = new NoeudAppuiSimple(this.model.maxIdNoeud(this.model.getListnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
+            this.model.ajouteNoeud(this.model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Appui Simple id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
@@ -328,7 +328,7 @@ public class MainPane extends BorderPane {
         
         this.bNoeudAppuiDouble.setOnAction(evt -> {
             Noeud nd = new NoeudAppuiDouble(model.maxIdNoeud(model.getListnoeud()) + 1, Double.parseDouble(this.txtFx.getText()), Double.parseDouble(this.txtFy.getText()));
-            model.ajouteNoeud(model.getListnoeud(), nd);
+            this.model.ajouteNoeud(this.model.getListnoeud(), nd);
             // Pour dessiner
             this.cDessin.getChildren().add(nd.dessine());
             System.out.printf("Bouton Noeud Appui Double id : %s - x : %s - y : %s\n", nd.getId(), nd.getPosx(), nd.getPosy());
@@ -342,7 +342,7 @@ public class MainPane extends BorderPane {
             Noeud Nf = trouveNoeud(idNf);
             if (Nd != null && Nf != null) {
                 Barre b = new Barre(Nd, Nf, model.maxIdBarre(model.getListbarre()) + 1);
-                model.ajouteBarre(model.getListbarre(),b);
+                this.model.ajouteBarre(this.model.getListbarre(),b);
                 //Pour dessiner
                 this.cDessin.getChildren().add(b.Barredessine());
                 System.out.printf("Bouton Barre id : %s - x : %s - y : %s\n", b.getId(), b.getNd(), b.getNf());
@@ -361,14 +361,14 @@ public class MainPane extends BorderPane {
         this.bSupprimerNoeud.setOnAction(evt -> {
             int IDNoeud = Integer.parseInt(this.txtIDN.getText());
             //Noeud NoeudSupp = trouveNoeud(IDNoeud);
-            model.getListnoeud().remove(IDNoeud-1);
+            this.model.getListnoeud().remove(IDNoeud-1);
             this.cDessin.redrawAll();
         });
         
         this.bSupprimerBarre.setOnAction(evt -> {
             int IDBarre = Integer.parseInt(this.txtIDB.getText());
             //Barre BarreSupp = trouveBarre(IDBarre);
-            model.getListbarre().remove(IDBarre-1);
+            this.model.getListbarre().remove(IDBarre-1);
             this.cDessin.redrawAll();
         });
         
